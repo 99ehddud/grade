@@ -1,6 +1,7 @@
 package grade;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.BorderLayout;
 
@@ -17,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 public class GradeManagementSystem extends JFrame {
 
@@ -66,12 +68,30 @@ public class GradeManagementSystem extends JFrame {
         tablePanel.setBounds(50, 70, 980, 450);
         tablePanel.setLayout(new BorderLayout());
 
-        String[] subjectArray = {"No.", "Name", "Language", "Math", "Society", "Science"};
-        DefaultTableModel tableTitle = new DefaultTableModel(subjectArray, 0);
+        String[] colNames = {"No.", "Name", "Language", "Math", "Society", "Science", "Total", "Average"};
+        DefaultTableModel tableTitle = new DefaultTableModel(colNames, 1);
         JTable mainTable = new JTable(tableTitle);
         JScrollPane scroll = new JScrollPane(mainTable);
         scroll.setBorder(BorderFactory.createEmptyBorder());
         tablePanel.add(scroll);
+        mainTable.getTableHeader().setReorderingAllowed(false);
+        mainTable.getTableHeader().setResizingAllowed(false);
+        mainTable.getTableHeader().setPreferredSize(new Dimension(0, 30));
+
+        // Set Table Header Center Align (https://itjbg.wordpress.com/2012/05/28/set-center-alignment-of-jtable-header-in-java/)
+        TableCellRenderer rendererFromHeader = mainTable.getTableHeader().getDefaultRenderer();
+        JLabel headerLabel = (JLabel) rendererFromHeader;
+        headerLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        mainTable.setRowHeight(30);
+        mainTable.getColumnModel().getColumn(0).setPreferredWidth(49);
+        mainTable.getColumnModel().getColumn(1).setPreferredWidth(131);
+        mainTable.getColumnModel().getColumn(2).setPreferredWidth(131);
+        mainTable.getColumnModel().getColumn(3).setPreferredWidth(131);
+        mainTable.getColumnModel().getColumn(4).setPreferredWidth(131);
+        mainTable.getColumnModel().getColumn(5).setPreferredWidth(131);
+        mainTable.getColumnModel().getColumn(6).setPreferredWidth(131);
+        mainTable.getColumnModel().getColumn(7).setPreferredWidth(131);
 
         this.add(tablePanel);
 
