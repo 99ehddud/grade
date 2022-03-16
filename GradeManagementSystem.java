@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -99,6 +100,25 @@ public class GradeManagementSystem extends JFrame {
         JPanel inputPanel = new JPanel();
         inputPanel.setBackground(new Color(215, 215, 255));
         inputPanel.setBounds(50, 520, 980, 130);
+
+        JLabel nameLabel = new JLabel();
+        nameLabel.setText("Name : ");
+        inputPanel.add(nameLabel);
+        JTextField name = new JTextField(10);
+        inputPanel.add(name);
+
+        JTextField language = new JTextField(5);
+        inputPanel.add(language);
+
+        JTextField math = new JTextField(5);
+        inputPanel.add(math);
+
+        JTextField society = new JTextField(5);
+        inputPanel.add(society);
+
+        JTextField science = new JTextField(5);
+        inputPanel.add(science);
+
         this.add(inputPanel);
 
         // Floating JFrame on Display
