@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.BorderLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -96,30 +97,58 @@ public class GradeManagementSystem extends JFrame {
 
         this.add(tablePanel);
 
-        // JPanel(For Input) Setting
-        JPanel inputPanel = new JPanel();
-        inputPanel.setBackground(new Color(215, 215, 255));
-        inputPanel.setBounds(50, 520, 980, 130);
+        // JPanel(For Input Name & Number) Setting
+        JPanel inputPersonalPanel = new JPanel();
+        inputPersonalPanel.setBackground(new Color(215, 215, 255));
+        inputPersonalPanel.setBounds(50, 520, 980, 50);
+
+        JLabel numberLabel = new JLabel();
+        numberLabel.setText("No. ");
+        inputPersonalPanel.add(numberLabel);
+        JTextField number = new JTextField(3);
+        inputPersonalPanel.add(number);
 
         JLabel nameLabel = new JLabel();
         nameLabel.setText("Name : ");
-        inputPanel.add(nameLabel);
+        inputPersonalPanel.add(nameLabel);
         JTextField name = new JTextField(10);
-        inputPanel.add(name);
+        inputPersonalPanel.add(name);
 
+        JButton submit = new JButton("Submit");
+        inputPersonalPanel.add(submit);
+
+        this.add(inputPersonalPanel);
+
+        // JPanel(For Input Score) Setting
+        JPanel inputScorePanel = new JPanel();
+        inputScorePanel.setBackground(new Color(215, 215, 255));
+        inputScorePanel.setBounds(50, 570, 980, 80);
+
+        JLabel languageLabel = new JLabel();
+        languageLabel.setText("Language : ");
+        inputScorePanel.add(languageLabel);
         JTextField language = new JTextField(5);
-        inputPanel.add(language);
+        inputScorePanel.add(language);
 
+        JLabel mathLabel = new JLabel();
+        mathLabel.setText("Math : ");
+        inputScorePanel.add(mathLabel);
         JTextField math = new JTextField(5);
-        inputPanel.add(math);
+        inputScorePanel.add(math);
 
+        JLabel societyLabel = new JLabel();
+        societyLabel.setText("Society : ");
+        inputScorePanel.add(societyLabel);
         JTextField society = new JTextField(5);
-        inputPanel.add(society);
+        inputScorePanel.add(society);
 
+        JLabel sciencLabel = new JLabel();
+        sciencLabel.setText("Science : ");
+        inputScorePanel.add(sciencLabel);
         JTextField science = new JTextField(5);
-        inputPanel.add(science);
+        inputScorePanel.add(science);
 
-        this.add(inputPanel);
+        this.add(inputScorePanel);
 
         // Floating JFrame on Display
         setLayout(null);
