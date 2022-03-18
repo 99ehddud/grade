@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -97,28 +99,6 @@ public class GradeManagementSystem extends JFrame {
 
         this.add(tablePanel);
 
-        // JPanel(For Input Name & Number) Setting
-        JPanel inputPersonalPanel = new JPanel();
-        inputPersonalPanel.setBackground(new Color(215, 215, 255));
-        inputPersonalPanel.setBounds(50, 520, 980, 50);
-
-        JLabel numberLabel = new JLabel();
-        numberLabel.setText("No. ");
-        inputPersonalPanel.add(numberLabel);
-        JTextField number = new JTextField(3);
-        inputPersonalPanel.add(number);
-
-        JLabel nameLabel = new JLabel();
-        nameLabel.setText("Name : ");
-        inputPersonalPanel.add(nameLabel);
-        JTextField name = new JTextField(10);
-        inputPersonalPanel.add(name);
-
-        JButton submit = new JButton("Submit");
-        inputPersonalPanel.add(submit);
-
-        this.add(inputPersonalPanel);
-
         // JPanel(For Input Score) Setting
         JPanel inputScorePanel = new JPanel();
         inputScorePanel.setBackground(new Color(215, 215, 255));
@@ -149,6 +129,63 @@ public class GradeManagementSystem extends JFrame {
         inputScorePanel.add(science);
 
         this.add(inputScorePanel);
+
+        // JPanel(For Input Name & Number) Setting
+        JPanel inputPersonalPanel = new JPanel();
+        inputPersonalPanel.setBackground(new Color(215, 215, 255));
+        inputPersonalPanel.setBounds(50, 520, 980, 50);
+
+        JLabel numberLabel = new JLabel();
+        numberLabel.setText("No. ");
+        inputPersonalPanel.add(numberLabel);
+        JTextField number = new JTextField(4);
+        inputPersonalPanel.add(number);
+
+        JLabel nameLabel = new JLabel();
+        nameLabel.setText("Name : ");
+        inputPersonalPanel.add(nameLabel);
+        JTextField name = new JTextField(10);
+        inputPersonalPanel.add(name);
+
+        JButton cancel = new JButton("Cancel");
+        inputPersonalPanel.add(cancel);
+
+        ActionListener btnCancel = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                name.setText(null);
+                language.setText(null);
+                math.setText(null);
+                society.setText(null);
+                science.setText(null);
+            }
+        };
+        cancel.addActionListener(btnCancel);
+
+        JButton submit = new JButton("Submit");
+        inputPersonalPanel.add(submit);
+
+        ActionListener btnSubmit = new ActionListener() {
+            int num = 0;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    // Input each text to String Array
+                    // About Score, do "Integer.parseInt()" first
+                    // And then do "toString()"
+                } catch (NumberFormatException nfe) {
+                    // When you push submit button, and if what you input is not integer
+                    // Error will occur and you cannot input your score to Array
+                    System.out.println("Error");
+                }
+                number.setText(String.format("%04d", num+1));
+                num++;
+            }
+        };
+        submit.addActionListener(btnSubmit);
+
+        this.add(inputPersonalPanel);
 
         // Floating JFrame on Display
         setLayout(null);
