@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
@@ -122,9 +124,9 @@ public class GradeManagementSystem extends JFrame {
         JTextField society = new JTextField(5);
         inputScorePanel.add(society);
 
-        JLabel sciencLabel = new JLabel();
-        sciencLabel.setText("Science : ");
-        inputScorePanel.add(sciencLabel);
+        JLabel scienceLabel = new JLabel();
+        scienceLabel.setText("Science : ");
+        inputScorePanel.add(scienceLabel);
         JTextField science = new JTextField(5);
         inputScorePanel.add(science);
 
@@ -139,6 +141,7 @@ public class GradeManagementSystem extends JFrame {
         numberLabel.setText("No. ");
         inputPersonalPanel.add(numberLabel);
         JTextField number = new JTextField(4);
+        number.setText(String.format("%04d", 1));
         inputPersonalPanel.add(number);
 
         JLabel nameLabel = new JLabel();
@@ -166,21 +169,59 @@ public class GradeManagementSystem extends JFrame {
         inputPersonalPanel.add(submit);
 
         ActionListener btnSubmit = new ActionListener() {
-            int num = 0;
+            int num = 1;
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                int i = 0;
+                String[] array = new String[8];
                 try {
-                    // Input each text to String Array
-                    // About Score, do "Integer.parseInt()" first
-                    // And then do "toString()"
+                    String numberGet = number.getText();
+                    array[0] = numberGet;
+                    String nameGet = name.getText();
+                    array[1] = nameGet;
+                    int languageGet = Integer.parseInt(language.getText());
+                    array[2] = Integer.toString(languageGet);
+                    i++;
+                    int mathGet = Integer.parseInt(math.getText());
+                    array[3] = Integer.toString(mathGet);
+                    i++;
+                    int societyGet = Integer.parseInt(society.getText());
+                    array[4] = Integer.toString(societyGet);
+                    i++;
+                    int scienceGet = Integer.parseInt(science.getText());
+                    array[5] = Integer.toString(scienceGet);
+                    i++;
+                    int total = languageGet + mathGet + societyGet + scienceGet;
+                    array[6] = Integer.toString(total);
+                    double average = total / 4;
+                    array[7] = Double.toString(average);
                 } catch (NumberFormatException nfe) {
                     // When you push submit button, and if what you input is not integer
                     // Error will occur and you cannot input your score to Array
-                    System.out.println("Error");
+                    System.out.println("Error! : " + nfe.getMessage());
                 }
-                number.setText(String.format("%04d", num+1));
-                num++;
+                
+                if (i == 4) {
+                    System.out.println(Arrays.toString(array));
+                    array = new String[8];
+                    number.setText(String.format("%04d", num + 1));
+                    num++;
+                    i = 0;
+                    JOptionPane.showMessageDialog(null, "Input Success!");
+                } else {
+                    if (i == 0) {
+                        language.setText(null);
+                    } else if (i == 1) {
+                        math.setText(null);
+                    } else if (i == 2) {
+                        society.setText(null);
+                    } else if (i == 3) {
+                        science.setText(null);
+                    }
+
+                    JOptionPane.showMessageDialog(null, "Please check the Textfield or input number correctly");
+                }
             }
         };
         submit.addActionListener(btnSubmit);
@@ -197,7 +238,8 @@ public class GradeManagementSystem extends JFrame {
     }
 }
 
-
-// Add Button for add grade
-// Add TextArea for input name & grade
-// 129, 144, 255
+// 1. Make TextField clear
+// 2. Write "If Statements(For Submit)" more specifically
+// 3. Write the code for NumberFormatException more specifically
+// 4. Make user input only integer in Score Field
+// 5. Make data be uploaded in JTable when user input correctly
