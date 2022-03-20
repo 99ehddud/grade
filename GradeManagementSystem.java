@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+// import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.BorderFactory;
@@ -27,6 +28,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 public class GradeManagementSystem extends JFrame {
+
+    private int i = 0;
+    // private ArrayList<String> data = new ArrayList<>();
 
     public GradeManagementSystem() {
         // JFrame Main Setting
@@ -173,55 +177,92 @@ public class GradeManagementSystem extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                int i = 0;
+                
                 String[] array = new String[8];
+                String where = "";
+                
                 try {
+                    int languageGet;
+                    int mathGet;
+                    int societyGet;
+                    int scienceGet;
+                    int total = 0;
+
                     String numberGet = number.getText();
                     array[0] = numberGet;
-                    String nameGet = name.getText();
-                    array[1] = nameGet;
-                    int languageGet = Integer.parseInt(language.getText());
-                    array[2] = Integer.toString(languageGet);
-                    i++;
-                    int mathGet = Integer.parseInt(math.getText());
-                    array[3] = Integer.toString(mathGet);
-                    i++;
-                    int societyGet = Integer.parseInt(society.getText());
-                    array[4] = Integer.toString(societyGet);
-                    i++;
-                    int scienceGet = Integer.parseInt(science.getText());
-                    array[5] = Integer.toString(scienceGet);
-                    i++;
-                    int total = languageGet + mathGet + societyGet + scienceGet;
-                    array[6] = Integer.toString(total);
-                    double average = total / 4;
-                    array[7] = Double.toString(average);
+                    if (i == 0) {
+                        String nameGet = name.getText();
+                        array[1] = nameGet;
+                        i++;
+                    }
+                    
+                    if (i == 1) {
+                        languageGet = Integer.parseInt(language.getText());
+                        total += languageGet;
+                        array[2] = Integer.toString(languageGet);
+                        i++;
+                    }
+                    
+                    if (i == 2) {
+                        mathGet = Integer.parseInt(math.getText());
+                        total += mathGet;
+                        array[3] = Integer.toString(mathGet);
+                        i++;
+                    }
+                    
+                    if (i == 3) {
+                        societyGet = Integer.parseInt(society.getText());
+                        total += societyGet;
+                        array[4] = Integer.toString(societyGet);
+                        i++;
+                    }
+                    
+                    if (i == 4) {
+                        scienceGet = Integer.parseInt(science.getText());
+                        total += scienceGet;
+                        array[5] = Integer.toString(scienceGet);
+                        i++;
+                    }
+                    
+                    if (i == 5) {
+                        array[6] = Integer.toString(total);
+                        double average = total / 4;
+                        array[7] = Double.toString(average);
+                    }
                 } catch (NumberFormatException nfe) {
                     // When you push submit button, and if what you input is not integer
                     // Error will occur and you cannot input your score to Array
-                    System.out.println("Error! : " + nfe.getMessage());
+                    if (i == 1) {
+                        language.setText(null);
+                        where += "Language";
+                    } else if (i == 2) {
+                        math.setText(null);
+                        where += "Math";
+                    } else if (i == 3) {
+                        society.setText(null);
+                        where += "Society";
+                    } else if (i == 4) {
+                        science.setText(null);
+                        where += "Language";
+                    }
+                    where += ": Please Input Correctly!";
+                    JOptionPane.showMessageDialog(null, where);
+                    i = 0;
                 }
                 
-                if (i == 4) {
+                if (i == 5) {
                     System.out.println(Arrays.toString(array));
                     array = new String[8];
                     number.setText(String.format("%04d", num + 1));
                     num++;
+                    name.setText(null);
+                    language.setText(null);
+                    math.setText(null);
+                    society.setText(null);
+                    science.setText(null);
                     i = 0;
                     JOptionPane.showMessageDialog(null, "Input Success!");
-                } else {
-                    if (i == 0) {
-                        language.setText(null);
-                    } else if (i == 1) {
-                        math.setText(null);
-                    } else if (i == 2) {
-                        society.setText(null);
-                    } else if (i == 3) {
-                        science.setText(null);
-                    }
-
-                    JOptionPane.showMessageDialog(null, "Please check the Textfield or input number correctly");
-                }
+                } 
             }
         };
         submit.addActionListener(btnSubmit);
@@ -237,6 +278,8 @@ public class GradeManagementSystem extends JFrame {
         new GradeManagementSystem();
     }
 }
+
+// * Have to nullCheck for when user doesn't input name
 
 // 1. Make TextField clear
 // 2. Write "If Statements(For Submit)" more specifically
