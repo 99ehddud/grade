@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-// import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.BorderFactory;
@@ -30,7 +29,6 @@ import javax.swing.table.TableCellRenderer;
 public class GradeManagementSystem extends JFrame {
 
     private int i = 0;
-    // private ArrayList<String> data = new ArrayList<>();
 
     public GradeManagementSystem() {
         // JFrame Main Setting
@@ -78,9 +76,9 @@ public class GradeManagementSystem extends JFrame {
         tablePanel.setBounds(50, 70, 980, 450);
         tablePanel.setLayout(new BorderLayout());
 
-        String[] colNames = {"No.", "Name", "Language", "Math", "Society", "Science", "Total", "Average"};
-        DefaultTableModel tableTitle = new DefaultTableModel(colNames, 1);
-        JTable mainTable = new JTable(tableTitle);
+        String[] tableTitle = {"No.", "Name", "Language", "Math", "Society", "Science", "Total", "Average"};
+        DefaultTableModel tableContent = new DefaultTableModel(tableTitle, 0);
+        JTable mainTable = new JTable(tableContent);
         JScrollPane scroll = new JScrollPane(mainTable);
         scroll.setBorder(BorderFactory.createEmptyBorder());
         tablePanel.add(scroll);
@@ -190,6 +188,7 @@ public class GradeManagementSystem extends JFrame {
 
                     String numberGet = number.getText();
                     array[0] = numberGet;
+                    // If user does not input their name or just input " ", Throw the exception
                     if (i == 0) {
                         String nameGet = name.getText();
                         array[1] = nameGet;
@@ -227,6 +226,7 @@ public class GradeManagementSystem extends JFrame {
                     if (i == 5) {
                         array[6] = Integer.toString(total);
                         double average = total / 4;
+                        // Set average Format "##.##"
                         array[7] = Double.toString(average);
                     }
                 } catch (NumberFormatException nfe) {
@@ -251,6 +251,7 @@ public class GradeManagementSystem extends JFrame {
                 }
                 
                 if (i == 5) {
+                    tableContent.addRow(array);
                     System.out.println(Arrays.toString(array));
                     array = new String[8];
                     number.setText(String.format("%04d", num + 1));
@@ -262,7 +263,7 @@ public class GradeManagementSystem extends JFrame {
                     science.setText(null);
                     i = 0;
                     JOptionPane.showMessageDialog(null, "Input Success!");
-                } 
+                }
             }
         };
         submit.addActionListener(btnSubmit);
