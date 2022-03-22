@@ -76,7 +76,11 @@ public class GradeManagementSystem extends JFrame {
         tablePanel.setBounds(50, 70, 980, 450);
         tablePanel.setLayout(new BorderLayout());
 
-        String[] tableTitle = {"No.", "Name", "Language", "Math", "Society", "Science", "Total", "Average"};
+        String[] personalData = { "No.", "Name"};
+        String[] subjectData = {"Language", "Math", "Society", "Science"};
+        String[] resultData = {"Total", "Average"};
+        String[] tableTitle = new String[personalData.length + subjectData.length + resultData.length];
+        // Set Function for adding elements(PersonalData, subjectData, resultData)
         DefaultTableModel tableContent = new DefaultTableModel(tableTitle, 0);
         JTable mainTable = new JTable(tableContent);
         JScrollPane scroll = new JScrollPane(mainTable);
@@ -225,9 +229,8 @@ public class GradeManagementSystem extends JFrame {
                     
                     if (i == 5) {
                         array[6] = Integer.toString(total);
-                        double average = total / 4;
-                        // Set average Format "##.##"
-                        array[7] = Double.toString(average);
+                        float average = total / 4;
+                        array[7] = String.format("%.2f", average);
                     }
                 } catch (NumberFormatException nfe) {
                     // When you push submit button, and if what you input is not integer
