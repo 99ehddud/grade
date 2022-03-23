@@ -81,6 +81,29 @@ public class GradeManagementSystem extends JFrame {
         String[] resultData = {"Total", "Average"};
         String[] tableTitle = new String[personalData.length + subjectData.length + resultData.length];
         // Set Function for adding elements(PersonalData, subjectData, resultData)
+        // Modify Syntax simply (Use "for" syntax)
+
+        int pd = personalData.length;
+        int sd = subjectData.length;
+        int psd = pd + sd;
+        int variableForArray = 0;
+
+        for (int variableForTableTitle = 0; variableForTableTitle < tableTitle.length; variableForTableTitle++) {
+            if (variableForTableTitle == pd || variableForTableTitle == psd) {
+                variableForArray = 0;
+            }
+
+            if (variableForTableTitle < pd) {
+                tableTitle[variableForTableTitle] = personalData[variableForArray];
+            } else if (pd <= variableForTableTitle && variableForTableTitle < psd) {
+                tableTitle[variableForTableTitle] = subjectData[variableForArray];
+            } else if (pd < variableForTableTitle) {
+                tableTitle[variableForTableTitle] = resultData[variableForArray];
+            }
+            
+            variableForArray++;
+        }
+
         DefaultTableModel tableContent = new DefaultTableModel(tableTitle, 0);
         JTable mainTable = new JTable(tableContent);
         JScrollPane scroll = new JScrollPane(mainTable);
@@ -229,7 +252,7 @@ public class GradeManagementSystem extends JFrame {
                     
                     if (i == 5) {
                         array[6] = Integer.toString(total);
-                        float average = total / 4;
+                        float average = total / (float)(subjectData.length);
                         array[7] = String.format("%.2f", average);
                     }
                 } catch (NumberFormatException nfe) {
@@ -289,4 +312,5 @@ public class GradeManagementSystem extends JFrame {
 // 2. Write "If Statements(For Submit)" more specifically
 // 3. Write the code for NumberFormatException more specifically
 // 4. Make user input only integer in Score Field
-// 5. Make data be uploaded in JTable when user input correctly
+// 5. Make data be uploaded in JTable when user input correctly -> OK!
+// 6. Set Table border-bottom and Text-align Center
