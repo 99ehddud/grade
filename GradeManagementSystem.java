@@ -21,14 +21,18 @@ import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 public class GradeManagementSystem extends JFrame {
 
     private int i = 0;
+    private int num = 1;
 
     public GradeManagementSystem() {
         // JFrame Main Setting
@@ -76,12 +80,11 @@ public class GradeManagementSystem extends JFrame {
         tablePanel.setBounds(50, 70, 980, 450);
         tablePanel.setLayout(new BorderLayout());
 
+        // For Setting Table Title
         String[] personalData = { "No.", "Name"};
         String[] subjectData = {"Language", "Math", "Society", "Science"};
         String[] resultData = {"Total", "Average"};
         String[] tableTitle = new String[personalData.length + subjectData.length + resultData.length];
-        // Set Function for adding elements(PersonalData, subjectData, resultData)
-        // Modify Syntax simply (Use "for" syntax)
 
         int pd = personalData.length;
         int sd = subjectData.length;
@@ -119,14 +122,7 @@ public class GradeManagementSystem extends JFrame {
         headerLabel.setHorizontalAlignment(JLabel.CENTER);
 
         mainTable.setRowHeight(30);
-        mainTable.getColumnModel().getColumn(0).setPreferredWidth(49);
-        mainTable.getColumnModel().getColumn(1).setPreferredWidth(131);
-        mainTable.getColumnModel().getColumn(2).setPreferredWidth(131);
-        mainTable.getColumnModel().getColumn(3).setPreferredWidth(131);
-        mainTable.getColumnModel().getColumn(4).setPreferredWidth(131);
-        mainTable.getColumnModel().getColumn(5).setPreferredWidth(131);
-        mainTable.getColumnModel().getColumn(6).setPreferredWidth(131);
-        mainTable.getColumnModel().getColumn(7).setPreferredWidth(131);
+        mainTable.getColumnModel().getColumn(0).setPreferredWidth(10);
 
         this.add(tablePanel);
 
@@ -198,13 +194,15 @@ public class GradeManagementSystem extends JFrame {
         inputPersonalPanel.add(submit);
 
         ActionListener btnSubmit = new ActionListener() {
-            int num = 1;
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 
                 String[] array = new String[8];
                 String where = "";
+                DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
+                dtcr.setHorizontalAlignment(SwingConstants.CENTER);
+                TableColumnModel tcm = mainTable.getColumnModel();
                 
                 try {
                     int languageGet;
@@ -278,6 +276,9 @@ public class GradeManagementSystem extends JFrame {
                 
                 if (i == 5) {
                     tableContent.addRow(array);
+                    for (int columnNum = 0; columnNum < array.length; columnNum++) {
+                        tcm.getColumn(columnNum).setCellRenderer(dtcr);
+                    }
                     System.out.println(Arrays.toString(array));
                     array = new String[8];
                     number.setText(String.format("%04d", num + 1));
@@ -295,7 +296,7 @@ public class GradeManagementSystem extends JFrame {
         submit.addActionListener(btnSubmit);
 
         this.add(inputPersonalPanel);
-
+        
         // Floating JFrame on Display
         setLayout(null);
         setVisible(true);
@@ -314,3 +315,4 @@ public class GradeManagementSystem extends JFrame {
 // 4. Make user input only integer in Score Field
 // 5. Make data be uploaded in JTable when user input correctly -> OK!
 // 6. Set Table border-bottom and Text-align Center
+// 7. Make cell not editable
