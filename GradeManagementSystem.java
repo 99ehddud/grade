@@ -32,7 +32,6 @@ import javax.swing.table.TableColumnModel;
 public class GradeManagementSystem extends JFrame {
 
     private int i = 0;
-    private int num = 1;
 
     public GradeManagementSystem() {
         // JFrame Main Setting
@@ -52,13 +51,10 @@ public class GradeManagementSystem extends JFrame {
         system.add(new JMenuItem("Exit"));
         menuBar.add(system);
         JMenu file = new JMenu("File");
-        file.add(new JMenuItem("New"));
-        file.add(new JMenuItem("Open"));
+        file.add(new JMenuItem("Save"));
+        file.addSeparator();
+        file.add(new JMenuItem("Delete"));
         menuBar.add(file);
-        JMenu edit = new JMenu("Edit");
-        edit.add(new JMenuItem("Edit"));
-        edit.add(new JMenuItem("Delete"));
-        menuBar.add(edit);
         root.setJMenuBar(menuBar);
 
         // JPanel(For Title) Setting
@@ -126,57 +122,50 @@ public class GradeManagementSystem extends JFrame {
 
         this.add(tablePanel);
 
-        // JPanel(For Input Score) Setting
-        JPanel inputScorePanel = new JPanel();
-        inputScorePanel.setBackground(new Color(215, 215, 255));
-        inputScorePanel.setBounds(50, 570, 980, 80);
-
-        JLabel languageLabel = new JLabel();
-        languageLabel.setText("Language : ");
-        inputScorePanel.add(languageLabel);
-        JTextField language = new JTextField(5);
-        inputScorePanel.add(language);
-
-        JLabel mathLabel = new JLabel();
-        mathLabel.setText("Math : ");
-        inputScorePanel.add(mathLabel);
-        JTextField math = new JTextField(5);
-        inputScorePanel.add(math);
-
-        JLabel societyLabel = new JLabel();
-        societyLabel.setText("Society : ");
-        inputScorePanel.add(societyLabel);
-        JTextField society = new JTextField(5);
-        inputScorePanel.add(society);
-
-        JLabel scienceLabel = new JLabel();
-        scienceLabel.setText("Science : ");
-        inputScorePanel.add(scienceLabel);
-        JTextField science = new JTextField(5);
-        inputScorePanel.add(science);
-
-        this.add(inputScorePanel);
-
-        // JPanel(For Input Name & Number) Setting
-        JPanel inputPersonalPanel = new JPanel();
-        inputPersonalPanel.setBackground(new Color(215, 215, 255));
-        inputPersonalPanel.setBounds(50, 520, 980, 50);
-
-        JLabel numberLabel = new JLabel();
-        numberLabel.setText("No. ");
-        inputPersonalPanel.add(numberLabel);
-        JTextField number = new JTextField(4);
-        number.setText(String.format("%04d", 1));
-        inputPersonalPanel.add(number);
+        // JPanel(For Input) Setting
+        JPanel inputPanel = new JPanel();
+        inputPanel.setBackground(new Color(215, 215, 255));
+        inputPanel.setBounds(50, 520, 980, 65);
 
         JLabel nameLabel = new JLabel();
         nameLabel.setText("Name : ");
-        inputPersonalPanel.add(nameLabel);
+        inputPanel.add(nameLabel);
         JTextField name = new JTextField(10);
-        inputPersonalPanel.add(name);
+        inputPanel.add(name);
+
+        JLabel languageLabel = new JLabel();
+        languageLabel.setText("Language : ");
+        inputPanel.add(languageLabel);
+        JTextField language = new JTextField(5);
+        inputPanel.add(language);
+
+        JLabel mathLabel = new JLabel();
+        mathLabel.setText("Math : ");
+        inputPanel.add(mathLabel);
+        JTextField math = new JTextField(5);
+        inputPanel.add(math);
+
+        JLabel societyLabel = new JLabel();
+        societyLabel.setText("Society : ");
+        inputPanel.add(societyLabel);
+        JTextField society = new JTextField(5);
+        inputPanel.add(society);
+
+        JLabel scienceLabel = new JLabel();
+        scienceLabel.setText("Science : ");
+        inputPanel.add(scienceLabel);
+        JTextField science = new JTextField(5);
+        inputPanel.add(science);
+
+        this.add(inputPanel);
+
+        // JPanel(For Button Setting
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(new Color(215, 215, 255));
+        buttonPanel.setBounds(50, 585, 980, 65);
 
         JButton cancel = new JButton("Cancel");
-        inputPersonalPanel.add(cancel);
+        buttonPanel.add(cancel);
 
         ActionListener btnCancel = new ActionListener() {
             @Override
@@ -191,12 +180,14 @@ public class GradeManagementSystem extends JFrame {
         cancel.addActionListener(btnCancel);
 
         JButton submit = new JButton("Submit");
-        inputPersonalPanel.add(submit);
+        buttonPanel.add(submit);
 
         ActionListener btnSubmit = new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                int num = 1;
                 
                 String[] array = new String[8];
                 String where = "";
@@ -211,7 +202,7 @@ public class GradeManagementSystem extends JFrame {
                     int scienceGet;
                     int total = 0;
 
-                    String numberGet = number.getText();
+                    String numberGet = String.format("%04d", num);
                     array[0] = numberGet;
                     // If user does not input their name or just input " ", Throw the exception
                     if (i == 0) {
@@ -281,7 +272,6 @@ public class GradeManagementSystem extends JFrame {
                     }
                     System.out.println(Arrays.toString(array));
                     array = new String[8];
-                    number.setText(String.format("%04d", num + 1));
                     num++;
                     name.setText(null);
                     language.setText(null);
@@ -295,7 +285,7 @@ public class GradeManagementSystem extends JFrame {
         };
         submit.addActionListener(btnSubmit);
 
-        this.add(inputPersonalPanel);
+        this.add(buttonPanel);
         
         // Floating JFrame on Display
         setLayout(null);
@@ -312,7 +302,7 @@ public class GradeManagementSystem extends JFrame {
 // 1. Make TextField clear
 // 2. Write "If Statements(For Submit)" more specifically
 // 3. Write the code for NumberFormatException more specifically
-// 4. Make user input only integer in Score Field
+// 4. Make user input only integer in inputPanel
 // 5. Make data be uploaded in JTable when user input correctly -> OK!
 // 6. Set Table border-bottom and Text-align Center
 // 7. Make cell not editable
