@@ -7,6 +7,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -194,7 +195,7 @@ public class GradeManagementSystem extends JFrame {
                 DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
                 dtcr.setHorizontalAlignment(SwingConstants.CENTER);
                 TableColumnModel tcm = mainTable.getColumnModel();
-                
+
                 try {
                     int languageGet;
                     int mathGet;
@@ -213,30 +214,46 @@ public class GradeManagementSystem extends JFrame {
                     
                     if (i == 1) {
                         languageGet = Integer.parseInt(language.getText());
-                        total += languageGet;
-                        array[2] = Integer.toString(languageGet);
-                        i++;
+                        if (0 <= languageGet && languageGet <= 100) {
+                            total += languageGet;
+                            array[2] = Integer.toString(languageGet);
+                            i++;
+                        } else {
+                            throw new InputMismatchException();
+                        }
                     }
                     
                     if (i == 2) {
                         mathGet = Integer.parseInt(math.getText());
-                        total += mathGet;
-                        array[3] = Integer.toString(mathGet);
-                        i++;
+                        if (0 <= mathGet && mathGet <= 100) {
+                            total += mathGet;
+                            array[3] = Integer.toString(mathGet);
+                            i++;
+                        } else {
+                            throw new InputMismatchException();
+                        }
                     }
                     
                     if (i == 3) {
                         societyGet = Integer.parseInt(society.getText());
-                        total += societyGet;
-                        array[4] = Integer.toString(societyGet);
-                        i++;
+                        if (0 <= societyGet && societyGet <= 100) {
+                            total += societyGet;
+                            array[4] = Integer.toString(societyGet);
+                            i++;
+                        } else {
+                            throw new InputMismatchException();
+                        }
                     }
                     
                     if (i == 4) {
                         scienceGet = Integer.parseInt(science.getText());
-                        total += scienceGet;
-                        array[5] = Integer.toString(scienceGet);
-                        i++;
+                        if (0 <= scienceGet && scienceGet <= 100) {
+                            total += scienceGet;
+                            array[5] = Integer.toString(scienceGet);
+                            i++;
+                        } else {
+                            throw new InputMismatchException();
+                        }
                     }
                     
                     if (i == 5) {
@@ -261,6 +278,23 @@ public class GradeManagementSystem extends JFrame {
                         where += "Language";
                     }
                     where += ": Please Input Correctly!";
+                    JOptionPane.showMessageDialog(null, where);
+                    i = 0;
+                } catch (InputMismatchException ime) {
+                    if (i == 1) {
+                        language.setText(null);
+                        where += "Language";
+                    } else if (i == 2) {
+                        math.setText(null);
+                        where += "Math";
+                    } else if (i == 3) {
+                        society.setText(null);
+                        where += "Society";
+                    } else if (i == 4) {
+                        science.setText(null);
+                        where += "Language";
+                    }
+                    where += ": Please Input score between 0 and 100";
                     JOptionPane.showMessageDialog(null, where);
                     i = 0;
                 }
