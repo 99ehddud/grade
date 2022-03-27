@@ -10,6 +10,8 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,13 +34,21 @@ import javax.swing.table.TableColumnModel;
 
 public class GradeManagementSystem extends JFrame {
 
+    // public class JTableColoredBorder extends Box {
+
+    //     public JTableColoredBorder(int axis) {
+    //         super(BoxLayout.Y_AXIS);
+    //     }
+
+    // }
+
     private int i = 0;
 
     public GradeManagementSystem() {
         // JFrame Main Setting
         setTitle("Grade Management System");
         setSize(1080, 720);
-        getContentPane().setBackground(new Color(129, 144, 255));
+        getContentPane().setBackground(new Color(125, 125, 125));
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -61,7 +71,7 @@ public class GradeManagementSystem extends JFrame {
         // JPanel(For Title) Setting
         JPanel titlePanel = new JPanel();
         titlePanel.setSize(1080, 50);
-        titlePanel.setBackground(new Color(86, 105, 255));
+        titlePanel.setBackground(new Color(125, 125, 125));
         titlePanel.setLayout(new BorderLayout());
 
         JLabel title = new JLabel("Grade Management System");
@@ -73,7 +83,6 @@ public class GradeManagementSystem extends JFrame {
 
         // JPanel(For Table) Setting
         JPanel tablePanel = new JPanel();
-        tablePanel.setBackground(new Color(129, 144, 255));
         tablePanel.setBounds(50, 70, 980, 450);
         tablePanel.setLayout(new BorderLayout());
 
@@ -112,6 +121,7 @@ public class GradeManagementSystem extends JFrame {
         mainTable.getTableHeader().setReorderingAllowed(false);
         mainTable.getTableHeader().setResizingAllowed(false);
         mainTable.getTableHeader().setPreferredSize(new Dimension(0, 30));
+        mainTable.getTableHeader().setFont(new Font("Gothic", Font.BOLD, 13));
 
         // Set Table Header Center Align (https://itjbg.wordpress.com/2012/05/28/set-center-alignment-of-jtable-header-in-java/)
         TableCellRenderer rendererFromHeader = mainTable.getTableHeader().getDefaultRenderer();
@@ -125,44 +135,59 @@ public class GradeManagementSystem extends JFrame {
 
         // JPanel(For Input) Setting
         JPanel inputPanel = new JPanel();
-        inputPanel.setBackground(new Color(215, 215, 255));
+        inputPanel.setBackground(new Color(180, 180, 255));
         inputPanel.setBounds(50, 520, 980, 65);
 
         JLabel nameLabel = new JLabel();
         nameLabel.setText("Name : ");
+        nameLabel.setFont(new Font("Gothic", 100, 18));
+        nameLabel.setBorder(BorderFactory.createEmptyBorder(21, 0, 0, 0));
         inputPanel.add(nameLabel);
-        JTextField name = new JTextField(10);
+        JTextField name = new JTextField();
+        name.setPreferredSize(new Dimension(120, 35));
         inputPanel.add(name);
 
         JLabel languageLabel = new JLabel();
         languageLabel.setText("Language : ");
+        languageLabel.setFont(new Font("Gothic", 100, 18));
+        languageLabel.setBorder(BorderFactory.createEmptyBorder(21, 0, 0, 0));
         inputPanel.add(languageLabel);
-        JTextField language = new JTextField(5);
+        JTextField language = new JTextField();
+        language.setPreferredSize(new Dimension(70, 35));
         inputPanel.add(language);
 
         JLabel mathLabel = new JLabel();
         mathLabel.setText("Math : ");
+        mathLabel.setFont(new Font("Gothic", 100, 18));
+        mathLabel.setBorder(BorderFactory.createEmptyBorder(21, 0, 0, 0));
         inputPanel.add(mathLabel);
-        JTextField math = new JTextField(5);
+        JTextField math = new JTextField();
+        math.setPreferredSize(new Dimension(70, 35));
         inputPanel.add(math);
 
         JLabel societyLabel = new JLabel();
         societyLabel.setText("Society : ");
+        societyLabel.setFont(new Font("Gothic", 100, 18));
+        societyLabel.setBorder(BorderFactory.createEmptyBorder(21, 0, 0, 0));
         inputPanel.add(societyLabel);
-        JTextField society = new JTextField(5);
+        JTextField society = new JTextField();
+        society.setPreferredSize(new Dimension(70, 35));
         inputPanel.add(society);
 
         JLabel scienceLabel = new JLabel();
         scienceLabel.setText("Science : ");
+        scienceLabel.setFont(new Font("Gothic", 100, 18));
+        scienceLabel.setBorder(BorderFactory.createEmptyBorder(21, 0, 0, 0));
         inputPanel.add(scienceLabel);
-        JTextField science = new JTextField(5);
+        JTextField science = new JTextField();
+        science.setPreferredSize(new Dimension(70, 35));
         inputPanel.add(science);
 
         this.add(inputPanel);
 
         // JPanel(For Button Setting
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(new Color(215, 215, 255));
+        buttonPanel.setBackground(new Color(180, 180, 255));
         buttonPanel.setBounds(50, 585, 980, 65);
 
         JButton cancel = new JButton("Cancel");
@@ -192,6 +217,7 @@ public class GradeManagementSystem extends JFrame {
                 
                 String[] array = new String[8];
                 String where = "";
+
                 DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
                 dtcr.setHorizontalAlignment(SwingConstants.CENTER);
                 TableColumnModel tcm = mainTable.getColumnModel();
