@@ -34,15 +34,16 @@ import javax.swing.table.TableColumnModel;
 
 public class GradeManagementSystem extends JFrame {
 
-    // public class JTableColoredBorder extends Box {
+    public class JTableColoredBorder extends Box {
 
-    //     public JTableColoredBorder(int axis) {
-    //         super(BoxLayout.Y_AXIS);
-    //     }
+        public JTableColoredBorder(int axis) {
+            super(BoxLayout.Y_AXIS);
+        }
 
-    // }
+    }
 
     private int i = 0;
+    private int num = 1;
 
     public GradeManagementSystem() {
         // JFrame Main Setting
@@ -136,51 +137,62 @@ public class GradeManagementSystem extends JFrame {
         // JPanel(For Input) Setting
         JPanel inputPanel = new JPanel();
         inputPanel.setBackground(new Color(180, 180, 255));
-        inputPanel.setBounds(50, 520, 980, 65);
+        inputPanel.setBounds(50, 520, 980, 65); // 40 205 20 175 20 135 20 150 20 155 40
+        inputPanel.setLayout(null);
 
         JLabel nameLabel = new JLabel();
         nameLabel.setText("Name : ");
         nameLabel.setFont(new Font("Gothic", 100, 18));
-        nameLabel.setBorder(BorderFactory.createEmptyBorder(21, 0, 0, 0));
+        nameLabel.setBounds(40, 15, 75, 35);
         inputPanel.add(nameLabel);
         JTextField name = new JTextField();
-        name.setPreferredSize(new Dimension(120, 35));
+        name.setBounds(115, 15, 130, 35);
+        name.setFont(new Font("Helvetica", 0, 18));
+        name.setHorizontalAlignment(JTextField.CENTER);
         inputPanel.add(name);
 
         JLabel languageLabel = new JLabel();
         languageLabel.setText("Language : ");
         languageLabel.setFont(new Font("Gothic", 100, 18));
-        languageLabel.setBorder(BorderFactory.createEmptyBorder(21, 0, 0, 0));
+        languageLabel.setBounds(265, 15, 110, 35);
         inputPanel.add(languageLabel);
         JTextField language = new JTextField();
-        language.setPreferredSize(new Dimension(70, 35));
+        language.setBounds(375, 15, 65, 35);
+        language.setFont(new Font("Helvetica", 0, 18));
+        language.setHorizontalAlignment(JTextField.CENTER);
         inputPanel.add(language);
 
         JLabel mathLabel = new JLabel();
         mathLabel.setText("Math : ");
         mathLabel.setFont(new Font("Gothic", 100, 18));
-        mathLabel.setBorder(BorderFactory.createEmptyBorder(21, 0, 0, 0));
+        mathLabel.setBounds(460, 15, 70, 35);
         inputPanel.add(mathLabel);
         JTextField math = new JTextField();
-        math.setPreferredSize(new Dimension(70, 35));
+        math.setBounds(530, 15, 65, 35);
+        math.setFont(new Font("Helvetica", 0, 18));
+        math.setHorizontalAlignment(JTextField.CENTER);
         inputPanel.add(math);
 
         JLabel societyLabel = new JLabel();
         societyLabel.setText("Society : ");
         societyLabel.setFont(new Font("Gothic", 100, 18));
-        societyLabel.setBorder(BorderFactory.createEmptyBorder(21, 0, 0, 0));
+        societyLabel.setBounds(615, 15, 85, 35);
         inputPanel.add(societyLabel);
         JTextField society = new JTextField();
-        society.setPreferredSize(new Dimension(70, 35));
+        society.setBounds(700, 15, 65, 35);
+        society.setFont(new Font("Helvetica", 0, 18));
+        society.setHorizontalAlignment(JTextField.CENTER);
         inputPanel.add(society);
 
         JLabel scienceLabel = new JLabel();
         scienceLabel.setText("Science : ");
         scienceLabel.setFont(new Font("Gothic", 100, 18));
-        scienceLabel.setBorder(BorderFactory.createEmptyBorder(21, 0, 0, 0));
+        scienceLabel.setBounds(785, 15, 90, 35);
         inputPanel.add(scienceLabel);
         JTextField science = new JTextField();
-        science.setPreferredSize(new Dimension(70, 35));
+        science.setBounds(875, 15, 65, 35);
+        science.setFont(new Font("Helvetica", 0, 18));
+        science.setHorizontalAlignment(JTextField.CENTER);
         inputPanel.add(science);
 
         this.add(inputPanel);
@@ -189,8 +201,11 @@ public class GradeManagementSystem extends JFrame {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(180, 180, 255));
         buttonPanel.setBounds(50, 585, 980, 65);
+        buttonPanel.setLayout(null);
 
         JButton cancel = new JButton("Cancel");
+        cancel.setFont(new Font("Gothic", Font.BOLD, 16));
+        cancel.setBounds(325, 15, 150, 35);
         buttonPanel.add(cancel);
 
         ActionListener btnCancel = new ActionListener() {
@@ -206,14 +221,15 @@ public class GradeManagementSystem extends JFrame {
         cancel.addActionListener(btnCancel);
 
         JButton submit = new JButton("Submit");
+        submit.setFont(new Font("Gothic", Font.BOLD, 16));
+        submit.setBounds(505, 15, 150, 35);
         buttonPanel.add(submit);
+
 
         ActionListener btnSubmit = new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                int num = 1;
                 
                 String[] array = new String[8];
                 String where = "";
